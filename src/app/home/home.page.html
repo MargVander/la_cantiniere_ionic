@@ -1,14 +1,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      La Cantinière
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<ion-content class="ion-text-center">
+  <ion-grid style="height: 100%">
+    <ion-row justify-content-center align-items-center style="height: 100%; flex-direction: column">
+      <ion-label>Bienvenue sur La Cantinière</ion-label>
+      <p>Choisissez, commandez et régalez-vous !</p>
+      <ion-button [routerLink]="['menu-semaine']">Nos Menus</ion-button>
+      <ion-button [routerLink]="['login']">Connectez-vous</ion-button>
+    </ion-row>
+  </ion-grid>
 </ion-content>
