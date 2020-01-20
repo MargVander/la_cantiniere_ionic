@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuService } from '../services/menu/menu.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-a-la-carte',
@@ -7,8 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ALaCarteComponent implements OnInit {
 
-  constructor() { }
+  private souscription: Subscription;
+  public meals: any;
 
-  ngOnInit() {}
+  constructor(private menuService: MenuService) { }
+
+  ngOnInit() {
+    this.getMealsByDay()
+  }
+
+  getMealsByDay() {    
+    this.souscription = this.menuService.getMealsByDay()
+    .subscribe(
+      resp => {
+        this.meals = resp;
+        console.log(this.meals);
+      }
+    )    
+  };
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuService } from '../services/menu/menu.service';
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-meals',
@@ -7,8 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MealsComponent implements OnInit {
 
-  constructor() { }
+  public meals: any;
+  private souscription: Subscription;
 
-  ngOnInit() {}
+  constructor(private menuService: MenuService) { }
+
+  ngOnInit() {
+    this.getMeals()
+  }
+
+  getMeals(){
+    this.souscription = this.menuService.getMeals()
+    .subscribe(
+      resp => {
+        this.meals = resp;
+        console.log(this.meals);
+        
+      }
+    )    
+  }
+
+  deleteMeal(id) {
+    this.menuService.deleteMeal(id)
+  }
 
 }

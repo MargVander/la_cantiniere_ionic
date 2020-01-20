@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuService } from '../services/menu/menu.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ingredients',
@@ -6,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ingredients.component.scss'],
 })
 export class IngredientsComponent implements OnInit {
+  public ingredients: any;
+  private souscription: Subscription;
 
-  constructor() { }
+  constructor(private menuService: MenuService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getIngredients()
+  }
+
+  getIngredients(){
+    this.souscription = this.menuService.getIngredients()
+    .subscribe(
+      resp => {
+        this.ingredients = resp;
+        console.log(this.ingredients);
+        
+      }
+    )    
+  }
+
+  deleteIngredient(id) {
+    this.menuService.deleteIngredient(id)
+  }
 
 }
