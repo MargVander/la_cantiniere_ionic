@@ -1,3 +1,36 @@
-<p>
-  profil works!
-</p>
+<ion-header>
+  <ion-item>
+    <ion-label>Profil Utilisateur</ion-label>
+  </ion-item>
+</ion-header>
+<ion-content class="ion-padding" *ngIf="user">
+  <ion-avatar>
+    <img src="http://localhost:8080/lunchtime/{{user.image}}" alt="">
+  </ion-avatar>
+  <ion-text>
+    <h1 *ngIf="user.firstname" style="text-align: center;">
+      {{ user.firstname }} {{user.name}}
+    </h1>
+    <div class="flex">
+      <ion-icon name="at"></ion-icon>
+      <p>{{user.email}}</p>
+    </div>
+    <div class="flex">
+      <ion-icon name="call"></ion-icon>
+      <p>{{user.phone}}</p>
+    </div>
+    <div class="flex">
+        <ion-icon name="home"></ion-icon>
+        <p>{{user.address}} {{user.postalCode}} - {{ user.town }} </p>
+      </div>
+    <div class="flex">
+        <ion-icon name="logo-euro"></ion-icon>
+      <p>{{user.wallet}} €</p>
+    </div>
+  </ion-text>
+  <div class="center">
+  <ion-button [routerLink]="['/profiledit', user.id]">Éditer le profil</ion-button>
+</div>
+
+</ion-content>
+

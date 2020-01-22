@@ -17,8 +17,6 @@ export class CommandesComponent implements OnInit {
 
   constructor(private orderService: OrderService) { }
 
-  ngOnInit() {}
-
   ngOnInit() {
     this.day = moment().day();
     console.log(this.day);
