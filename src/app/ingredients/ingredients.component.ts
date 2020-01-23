@@ -17,13 +17,15 @@ export class IngredientsComponent implements OnInit {
     this.getIngredients()
   }
 
-  getIngredients(){
+  getIngredients(event?){
     this.souscription = this.menuService.getIngredients()
     .subscribe(
       resp => {
         this.ingredients = resp;
         console.log(this.ingredients);
-        
+        if(event){
+          event.target.complete();
+          }
       }
     )    
   }

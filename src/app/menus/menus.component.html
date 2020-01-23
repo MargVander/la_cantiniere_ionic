@@ -1,3 +1,20 @@
-<p>
-  menus works!
-</p>
+<ion-header>
+  <ion-item>
+    <ion-label>Menus</ion-label>
+  </ion-item>
+</ion-header>
+<ion-content>
+  <ion-button expand="block" [routerLink]="['/newmenu']">Ajouter un menu</ion-button>
+
+    <ion-list *ngFor="let menu of menus">
+      <ion-item>
+          <ion-text>
+              <h5>{{menu.label}} - {{menu.priceDF}} €</h5>
+              <p *ngFor="let meal of menu.meals">- {{meal.label}}</p>
+            </ion-text>
+            <ion-button (click)="deleteMenu(menu.id)" color="danger">Supprimer</ion-button>
+            <ion-button [routerLink]="['/menuedit', menu.id]">Éditer</ion-button>
+      </ion-item>
+      
+    </ion-list>
+</ion-content>

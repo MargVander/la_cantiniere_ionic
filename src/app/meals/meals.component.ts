@@ -18,13 +18,15 @@ export class MealsComponent implements OnInit {
     this.getMeals()
   }
 
-  getMeals(){
+  getMeals(event?){
     this.souscription = this.menuService.getMeals()
     .subscribe(
       resp => {
         this.meals = resp;
         console.log(this.meals);
-        
+        if(event){
+          event.target.complete();
+          }
       }
     )    
   }

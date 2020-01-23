@@ -1,3 +1,38 @@
-<p>
-  new-meal works!
-</p>
+<ion-header>
+  <ion-item>
+    <ion-label>Nouveau plat</ion-label>
+  </ion-item>
+</ion-header>
+<ion-content *ngIf="ingredients">
+  <form [formGroup]="mealForm" (ngSubmit)='onSubmit()'>
+    <ion-item>
+      <ion-label>Nom :</ion-label>
+      <ion-input type='text' formControlName="label"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description :</ion-label>
+      <ion-input type='text' formControlName="description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prix en € :</ion-label>
+      <ion-input type='number' formControlName="priceDF"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ingredients</ion-label>
+      <ion-select multiple formControlName="ingredientsId">
+        <ion-select-option *ngFor="let ingredient of ingredients" value="{{ingredient.id}}">{{ingredient.label}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Semaines de disponibilité</ion-label>
+      <ion-select multiple formControlName="availableForWeeks">
+        <ion-select-option *ngFor="let number of numbers" value="{{number +1}}">{{number + 1}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button type="submit" expand="block">Envoyer</ion-button>
+  </form>
+
+
+
+</ion-content>

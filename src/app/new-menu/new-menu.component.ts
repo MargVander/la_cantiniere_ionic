@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../services/menu/menu.service'
 import { FormBuilder, Validators } from "@angular/forms"
 import { Subscription } from 'rxjs'
+import {Router} from "@angular/router"
+
 
 @Component({
   selector: 'app-new-menu',
@@ -22,7 +24,7 @@ export class NewMenuComponent implements OnInit {
   private souscription: Subscription;
   numbers = Array(52).fill(0).map((x,i)=>i);
 
-  constructor(private menuService: MenuService, private formBuilder: FormBuilder) { }
+  constructor(private menuService: MenuService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.getMeals()
@@ -31,7 +33,8 @@ export class NewMenuComponent implements OnInit {
   onSubmit(){
     console.log(this.menuForm.value);
     this.menuService.addMenu(this.menuForm.value)
-    
+    this.router.navigate(['/menus']);
+
   }
 
   getMeals(){

@@ -18,13 +18,15 @@ export class MenusComponent implements OnInit {
     this.getMenus()
   }
 
-  getMenus(){
+  getMenus(event?){
     this.souscription = this.menuService.getMenus()
     .subscribe(
       resp => {
         this.menus = resp;
         console.log(this.menus);
-        
+        if(event){
+          event.target.complete();
+          }
       }
     )    
   }
