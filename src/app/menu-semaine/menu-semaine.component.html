@@ -1,13 +1,14 @@
 <ion-content>
 <div class="container">
   <ion-card class="card mb-4" *ngFor="let menu of menu">
-    <ion-card-content>
+    <ion-card-header>
       <ion-card-title>{{menu.label}} &nbsp; &nbsp; -- &nbsp; &nbsp;{{menu.priceDF}}€</ion-card-title>
       <p class="card-text">{{menu.description}}</p>
           <p *ngFor="let meal of menu.meals">
             <a>{{meal.label}}</a>
           </p>
-
+</ion-card-header>
+<ion-card-content>
           <ion-button class="ajout"  (click)="addToPanier(menu)"><i class="fas fa-times"></i></ion-button>
           <a>
           <ion-img class="cart" src="../../assets/img/shopping-cart.svg" alt="" (click)="openLg(mymodal, menu.id)"></ion-img>
