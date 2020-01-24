@@ -1,3 +1,27 @@
-<p>
-  constraint-edit works!
-</p>
+<ion-header>
+    <ion-item>
+      <ion-label>Edition des contraintes</ion-label>
+    </ion-item>
+  </ion-header>
+    <ion-content *ngIf="constraint">
+      <form [formGroup]="constraintForm" (ngSubmit)='onSubmit()'>
+        <ion-item>
+          <ion-label>Nombre max de commandes par jour :</ion-label>
+          <ion-input type='number' formControlName="maximumOrderPerDay"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Temps limite de commande :</ion-label>
+            <ion-datetime display-format="H:mm" picker-format="H:mm" value="1990-02-19T07:43Z" formControlName="orderTimeLimit"></ion-datetime>
+          </ion-item>
+        <ion-item>
+            <ion-label>Taux de la TVA (en %) :</ion-label>
+            <ion-input type='number' formControlName="rateVAT"></ion-input>
+        </ion-item>
+        
+        <ion-button type="submit" expand="block" [disabled]="!form.valid">Envoyer</ion-button>
+      </form>
+  
+  
+  
+    </ion-content>
+  

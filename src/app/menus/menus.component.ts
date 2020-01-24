@@ -33,6 +33,7 @@ export class MenusComponent implements OnInit {
 
   deleteMenu(id){
     this.menuService.deleteMenu(id)
+    location.reload();
   }
 
 }

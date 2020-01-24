@@ -37,6 +37,8 @@ export class OrderComponent implements OnInit {
 
   cancelOrder(id) {
     this.orderService.cancelOrder(id);
+    location.reload();
+
   }
 
   computePrice(orderId) {
