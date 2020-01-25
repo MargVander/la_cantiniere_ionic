@@ -1,0 +1,119 @@
+<ion-header>
+    <ion-item>
+        <ion-label>Profil Utilisateur</ion-label>
+    </ion-item>
+</ion-header>
+<ion-content class="ion-padding" *ngIf="user">
+    <ion-avatar>
+        <img src="http://localhost:8080/lunchtime/{{user.image}}" alt="">
+    </ion-avatar>
+    <ion-text>
+        <h1 *ngIf="user.firstname" style="text-align: center;">
+            {{ user.firstname }} {{user.name}}
+        </h1>
+        <div class="flex">
+            <ion-icon name="logo-euro"></ion-icon>
+            <p>{{user.wallet}} €</p>
+        </div>
+        <form *ngIf="user" (ngSubmit)="update()" [formGroup]="updateForm">
+            <div class="flex">
+                <ion-icon name="pizza"></ion-icon>
+                <ion-select value="user.isLunchLady" formControlName="isLunchLady">
+                    <ion-select-option value="false">Utilisateur</ion-select-option>
+                    <ion-select-option value="true">Cantinière</ion-select-option>
+                </ion-select>
+            </div>
+            <ion-item>
+                <ion-label>Mot de passe :</ion-label>
+                <ion-input type='password' formControlName="password"></ion-input>
+            </ion-item>
+            <ion-button type="submit"> Modifier </ion-button>
+        </form>
+        <form *ngIf="user" (ngSubmit)="updateMoney()" [formGroup]="moneyForm">
+            <ion-item>
+                <ion-label>Ajouter du credit :</ion-label>
+                <ion-input type='number' formControlName="amount"></ion-input>
+            </ion-item>
+            <ion-button type="submit">Valider </ion-button>
+
+        </form>
+    </ion-text>
+    <div class="center">
+    </div>
+
+</ion-content>
+
+
+
+
+
+<!-- <div class="container" *ngIf="user">
+
+    <div class="form-group">
+        <p class="form-control"> Prénom : {{ user.name }} </p>
+    </div>
+
+    <div class="form-group">
+        <p class="form-control"> Nom : {{ user.firstname }} </p>
+    </div>
+
+    <div class="form-group">
+        <p class="form-control"> Adresse mail : {{ user.email }} </p>
+    </div>
+
+    <div class="form-group">
+        <p class="form-control" *ngIf="user.sex == 0"> Sexe : Homme </p>
+        <p class="form-control" *ngIf="user.sex == 1"> Sexe : Femme </p>
+
+    </div>
+
+    <div class="form-group" *ngIf="user.image64">
+        <img src="user. image64" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <p class="form-control"> Crédit : {{ user.wallet }} € </p>
+    </div>
+
+
+    <form *ngIf="user" (ngSubmit)="update()" [formGroup]="updateForm">
+
+        <div class="form-group">
+
+            <label for="isLunchLady"> Rôle </label>
+            <select class="form-control" formControlName="isLunchLady">
+                <option value="false">utilisateur </option>
+                <option value="true">admin</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label for="password"> Mot de passe</label>
+            <input class="form-control" type="password" formControlName="password" name="password">
+
+            <div class="red" *ngIf="password">
+                {{ password }}
+            </div>
+        </div>
+
+        <div class="center">
+
+            <button type="submit" class="button"> Modifier </button>
+        </div>
+
+    </form>
+
+
+    <form *ngIf="user" (ngSubmit)="updateMoney()" [formGroup]="moneyForm">
+
+        <div class="form-group">
+            <label for="amount"> Ajouter du crédit </label>
+            <input class="form-control" type="number" formControlName="amount" required>
+        </div>
+
+        <button type="submit" class="button"> Ajouter </button>
+
+    </form>
+
+</div> -->

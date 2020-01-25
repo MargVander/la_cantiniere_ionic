@@ -22,6 +22,10 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { ConstraintEditComponent } from './constraint-edit/constraint-edit.component';
 import { OrderComponent } from './order/order.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { UsersComponent } from './users/users.component';
+import { UserComponent } from './user/user.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -47,7 +51,9 @@ const routes: Routes = [
   { path: 'profiledit/:id', component: UserEditComponent },
   { path: 'constraintedit', component: ConstraintEditComponent },
   { path: 'mes-commandes/:id', component: OrderComponent },
-  
+  { path: 'users', component: UsersComponent },
+  { path: 'user/:id', component: UserComponent },
+  { path: 'dashboard', component: DashboardComponent },
 ];
 
 @NgModule({

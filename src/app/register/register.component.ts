@@ -11,8 +11,8 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup
 
+  firstname: string
   name: string
-  surname: string
   sex: string
   phone: string
   address: string
@@ -23,8 +23,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(fb: FormBuilder, private userService: UserService) {
     this.registerForm = fb.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
-      surname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
+      firstname: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
       sex: new FormControl('', [Validators.required]),
       phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       address: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(40)]),
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       town: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
       image64: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15), Validators.pattern('^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\\D*\\d)[A-Za-z\\d!$%@#£€*?&]{8,}$')]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       wallet: new FormControl(0),
       registrationDate: Date()
     })
@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
       }
       if (this.registerForm.controls.surname.invalid) {
 
-        this.surname = "Le nom est obligatoire et doit avoir entre 3 et 15 lettres"
+        this.firstname = "Le nom est obligatoire et doit avoir entre 3 et 15 lettres"
       }
       if (this.registerForm.controls.sex.invalid) {
 
