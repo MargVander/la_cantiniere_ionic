@@ -37,6 +37,10 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { ConstraintEditComponent } from './constraint-edit/constraint-edit.component';
 import { OrderComponent } from './order/order.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard, AdminGuard } from './services/auth/auth.guard';
+import { LoginComponent } from './login/login.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+
 
 
 @NgModule({
@@ -70,12 +74,16 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ConstraintEditComponent,
     OrderComponent,
     DashboardComponent,
+    LoginComponent,
+    ForgotpasswordComponent
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule],
   providers: [
     StatusBar,
     SplashScreen,
+    AuthGuard,
+    AdminGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
