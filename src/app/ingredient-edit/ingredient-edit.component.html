@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-item>
+      <ion-label>Edition du profil</ion-label>
+    </ion-item>
+  </ion-header>
+    <ion-content *ngIf="ingredient">
+      <form [formGroup]="ingredientForm" (ngSubmit)='onSubmit()'>
+        <ion-item>
+          <ion-label>Nom :</ion-label>
+          <ion-input type='text' formControlName="label"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Description :</ion-label>
+            <ion-input type='text' formControlName="description"></ion-input>
+          </ion-item>
+        
+        <ion-button type="submit" expand="block" [disabled]="!form.valid">Envoyer</ion-button>
+      </form>
+  
+  
+  
+    </ion-content>
+  

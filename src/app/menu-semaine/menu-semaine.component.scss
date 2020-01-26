@@ -1,0 +1,40 @@
+/*.container{
+    margin-top: 40px;
+}
+li{
+    list-style: none;
+}
+.card{
+    background-color: rgba(237, 234, 229, 0.37);
+    border: none;
+    position: relative;
+}
+.card-title{
+    color:rgb(117, 143, 66);
+    text-align: center;
+}
+
+.card-body{
+    margin-bottom: 55px;
+}
+a{
+    color: rgb(44, 44, 44);
+}
+.price{
+    color: black;
+}*/
+.ajout{
+    height: 50px;
+    width: 50px;
+    bottom: 10px;
+    border-radius: 25px;
+    position: absolute;
+    transform: rotate(45deg);
+    border: none;
+}
+.cart{
+    height: 50px;
+    position: absolute;
+    bottom: 10px;
+    left: 60%;
+}

@@ -1,3 +1,24 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="content">
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item>Home</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>Menu</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>A la carte</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>Connexion</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item>Panier</ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="content"></ion-router-outlet>
 </ion-app>
