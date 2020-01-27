@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      La Cantinière
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center">
+  <ion-grid style="height: 100%">
+    <ion-row justify-content-center align-items-center style="height: 100%; flex-direction: column">
+      <ion-label>Bienvenue sur La Cantinière</ion-label>
+      <p>Choisissez, commandez et régalez-vous !</p>
+      <ion-button [routerLink]="['/menu-semaine']">Nos Menus</ion-button>
+      <ion-button *ngIf='id == 1' [routerLink]="['/dashboard']">Dashboard</ion-button>
+
+      <ion-button *ngIf='!logged' [routerLink]="['/login']">Connectez-vous</ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

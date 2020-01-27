@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-item>
+    <ion-label>À La Carte</ion-label>
+  </ion-item>
+</ion-header>
+<ion-content>
+      
+      <ion-card *ngFor="let meal of meals">
+          <ion-img src='http://localhost:8080/lunchtime/{{meal.image}}'></ion-img>
+          <ion-card-header>
+              
+              <ion-card-title>{{ meal.label }}</ion-card-title>
+              <ion-card-title>{{ meal.priceDF }} €</ion-card-title>
+            </ion-card-header>
+          
+      </ion-card>
+</ion-content>

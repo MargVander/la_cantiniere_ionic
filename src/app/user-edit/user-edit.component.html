@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-item>
+    <ion-label>Edition du profil</ion-label>
+  </ion-item>
+</ion-header>
+  <ion-content *ngIf="user">
+    <form [formGroup]="userForm" (ngSubmit)='onSubmit()'>
+      <ion-item>
+        <ion-label>Prénom :</ion-label>
+        <ion-input type='text' formControlName="firstname"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nom :</ion-label>
+        <ion-input type='text' formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Email :</ion-label>
+        <ion-input type='email' formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Numéro de téléphone :</ion-label>
+        <ion-input type='tel' formControlName="phone"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Adresse :</ion-label>
+        <ion-input type='text' formControlName="address"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Code Postal :</ion-label>
+        <ion-input type='text' formControlName="postalCode"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ville :</ion-label>
+        <ion-input type='text' formControlName="town"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mot de passe :</ion-label>
+        <ion-input type='password' formControlName="password"></ion-input>
+      </ion-item>
+      
+      <ion-button type="submit" expand="block">Envoyer</ion-button>
+    </form>
+
+
+
+  </ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-item>
+      <ion-label>Mes commandes</ion-label>
+    </ion-item>
+  </ion-header>
+  <ion-content *ngIf="orders">
+    <ion-grid>
+      <ion-row *ngFor="let order of orders; let index = index">
+        <ion-col *ngIf=order.menu>
+          <div>
+            {{order.menu.label}}
+          </div>
+        </ion-col>
+        <ion-col *ngIf="order.quantityMeals">
+          <div>
+            <p *ngFor="let meal of order.quantityMeals">{{meal.quantity}}, {{meal.meal.label}}</p>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div>
+            {{prices[index]}} €
+          </div>
+        </ion-col>
+        <ion-col>
+            <ion-button color="danger" (click)="cancelOrder(order.id)">X</ion-button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </ion-content>

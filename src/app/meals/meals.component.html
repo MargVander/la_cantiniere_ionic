@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-item>
+    <ion-label>Plats</ion-label>
+  </ion-item>
+</ion-header>
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="getMeals($event)">
+ 
+      </ion-refresher>
+  <ion-button expand="block" [routerLink]="['/newmeal']">Ajouter un plat</ion-button>
+
+    <ion-list *ngFor="let meal of meals">
+      <ion-item>
+          <ion-text>
+              <h5>{{meal.label}} - {{meal.priceDF}} €</h5>
+              <p *ngFor="let ingredient of meal.ingredients">- {{ingredient.label}}</p>
+            </ion-text>
+            <ion-button (click)="deleteMeal(meal.id)" color="danger">Supprimer</ion-button>
+            <ion-button [routerLink]="['/mealedit', meal.id]">Éditer</ion-button>
+      </ion-item>
+      
+    </ion-list>
+</ion-content>
