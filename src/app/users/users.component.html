@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-item>
+      <ion-label>Utilisateurs</ion-label>
+    </ion-item>
+  </ion-header>
+  <ion-content *ngIf="users">
+      <ion-refresher slot="fixed" (ionRefresh)="getUsers($event)">
+   
+        </ion-refresher>
+      <ion-list *ngFor="let user of users">
+        <ion-card>
+            <ion-text>
+                <h4>{{user.firstname}} {{user.name}} - {{user.wallet}} €</h4>
+            </ion-text>
+            <ion-button color="danger" *ngIf="!user.status" (click)="setDesactivation(user.id)">Désactiver</ion-button>  <ion-button *ngIf="user.status" (click)="setActivation(user.id)">Activer</ion-button> <ion-button [routerLink]="['/user', user.id]">Éditer</ion-button>
+
+            
+        </ion-card>
+        
+      </ion-list>
+  </ion-content>
+
+
+<!-- <div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Solde</th>
+                <th> Activation </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.name}}</td>
+                <td> {{user.firstname}} </td>
+                <td>{{user.wallet}}</td>
+
+                <td *ngIf="!user.status">
+                    <input type="button" value="désactiver" (click)="setDesactivation(user.id)">
+                </td>
+
+                <td *ngIf="user.status">
+                    <input type="button" value="activer" (click)="setActivation(user.id)">
+                </td>
+
+                <td>
+                    <a [routerLink]="['/user', user.id]">Editer</a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div> -->

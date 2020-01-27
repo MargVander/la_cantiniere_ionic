@@ -1,47 +1,103 @@
+import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { map, tap, catchError } from 'rxjs/operators';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { HeaderService } from '../header/header.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  httpOptions = this.headerService.headerBuilder();
 
-  setInscription(data: any) {
 
-    // var reqHeader = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJhZGRyZXNzIjoiNDMgcnVlIGRlIGxhIFByYWlyaWUiLCJ3YWxsZXQiOjUwLjAwLCJwb3N0YWxDb2RlIjoiNzUwMDAiLCJyZWdpc3RyYXRpb25EYXRlIjoxNTUxNTM2MjQ4MDAwLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJEdXJhbnQiLCJmaXJzdG5hbWUiOiJBbGJlcnQiLCJwaG9uZSI6IjAxNDg1Njc4OTciLCJ0b3duIjoiUGFyaXMiLCJzZXgiOjAsInN0YXR1cyI6MH0sInJvbGVzIjpbIlJPTEVfTFVOQ0hMQURZIiwiUk9MRV9VU0VSIl0sImlzcyI6InNlY3VyZS1hcGkiLCJhdWQiOiJzZWN1cmUtYXBwIiwic3ViIjoidG90b0BnbWFpbC5jb20iLCJleHAiOjE1NzU0OTY4OTd9.qniK5uyzGvrAYkp1ODqQATTpjAc5KElsXefHT0TYD0j7Uk0UQz1XDN40mfzkT1M18bhxrqWE5iXJD8jbl3YQgg'
-    // });
+  constructor(private http: HttpClient, private headerService: HeaderService) { }
+
+  setInscription(data: any): Observable<any> {
 
     console.log(data)
-    this.http.put('http://localhost:8080/lunchtime/user/register/', data)
-      .subscribe(data => {
-        console.log(data);
-      }, error => {
-        console.log(error);
-      })
+    return this.http.put('http://localhost:8080/lunchtime/user/register/', data);
   }
 
-  getUser(id) {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJhZGRyZXNzIjoiNDMgcnVlIGRlIGxhIFByYWlyaWUiLCJ3YWxsZXQiOjEwNS45MiwicG9zdGFsQ29kZSI6IjU5MzAwIiwicmVnaXN0cmF0aW9uRGF0ZSI6MTU1MTUzNjI0ODAwMCwiZW1haWwiOiJ0b3RvQGdtYWlsLmNvbSIsImlzTHVuY2hMYWR5Ijp0cnVlLCJuYW1lIjoiRHVyYW50IiwiZmlyc3RuYW1lIjoiTWljaGVsaW5lIiwicGhvbmUiOiIwMTQ4NTY3ODk3IiwidG93biI6IkR1bmtlcnF1ZSIsInNleCI6MCwic3RhdHVzIjowfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiLCJST0xFX1VTRVIiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTU3OTcyODE5OH0.DNB2pwyuMJklNwfqKvZH3AulNH-ccMk1ITwX-aHW9bA_z1dSUlAdyhvuAkldNlk3tvmgP_R7oPpg7If02qo_Pg'
-    });
-    return this.http.get(`http://localhost:8080/lunchtime/user/find/${id}`, { headers: reqHeader })
+  getUsers(): Observable<any> {
+
+    console.log(this.httpOptions)
+    return this.http.get('http://localhost:8080/lunchtime/user/findall', this.httpOptions);
+
+  }
+
+  getUser(id: number): Observable<any> {
+
+    return this.http.get('http://localhost:8080/lunchtime/user/find/' + id, this.httpOptions);
+
+
   }
 
   editUser(id, data: any) {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJhZGRyZXNzIjoiNDMgcnVlIGRlIGxhIFByYWlyaWUiLCJ3YWxsZXQiOjEwNS45MiwicG9zdGFsQ29kZSI6IjU5MzAwIiwicmVnaXN0cmF0aW9uRGF0ZSI6MTU1MTUzNjI0ODAwMCwiZW1haWwiOiJ0b3RvQGdtYWlsLmNvbSIsImlzTHVuY2hMYWR5Ijp0cnVlLCJuYW1lIjoiRHVyYW50IiwiZmlyc3RuYW1lIjoiTWljaGVsaW5lIiwicGhvbmUiOiIwMTQ4NTY3ODk3IiwidG93biI6IkR1bmtlcnF1ZSIsInNleCI6MCwic3RhdHVzIjowfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiLCJST0xFX1VTRVIiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTU3OTcyODE5OH0.DNB2pwyuMJklNwfqKvZH3AulNH-ccMk1ITwX-aHW9bA_z1dSUlAdyhvuAkldNlk3tvmgP_R7oPpg7If02qo_Pg'
-    });
-    this.http.patch(`http://localhost:8080/lunchtime/user/update/${id}`, data, { headers: reqHeader })
+    this.http.patch(`http://localhost:8080/lunchtime/user/update/${id}`, data, this.httpOptions)
       .subscribe(data => {
         console.log(data);
       }, error => {
         console.log(error);
       })
   }
+
+  deleteUser(id) {
+    this.http.delete(`http://localhost:8080/lunchtime/user/delete/${id}`, this.httpOptions)
+      .subscribe(data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+      })
+  }
+
+  setActivation(id: number) {
+
+    let obs: Observable<any>
+
+    obs = this.http.patch('http://localhost:8080/lunchtime/user/activate/' + id, null, this.httpOptions)
+    console.log(obs)
+    return obs;
+  }
+
+  setDesactivation(id: number) {
+
+    let obs: Observable<any>
+
+    obs = this.http.patch('http://localhost:8080/lunchtime/user/deactivate/' + id, null, this.httpOptions)
+    console.log(obs)
+    return obs;
+
+  }
+
+  setDroit(id: number) {
+
+    this.http.patch('http://localhost:8080/lunchtime/user/update/' + id, null, this.httpOptions)
+
+  }
+
+  adminUpdate(id: any, content: any) {
+
+    let obs: Observable<any>
+    console.log(content)
+
+
+    console.log(id);
+    obs = this.http.patch('http://localhost:8080/lunchtime/user/update/' + id, content, this.httpOptions)
+    console.log(obs);
+    return obs;
+  }
+
+  walletUpdate(id: number, content: number) {
+
+    let obs: Observable<any>
+    console.log(content)
+
+    obs = this.http.post('http://localhost:8080/lunchtime/user/credit/' + id + '?amount=' + content, null, this.httpOptions)
+    console.log(obs)
+    return obs;
+  }
+
 }

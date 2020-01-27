@@ -3,19 +3,31 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item>Home</ion-item>
+          <ion-item [routerLink]="['']">Home</ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item>Menu</ion-item>
+          <ion-item [routerLink]="['menu-semaine']">Menu</ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item>A la carte</ion-item>
+          <ion-item [routerLink]="['a-la-carte']">A la carte</ion-item>
         </ion-menu-toggle>
-        <ion-menu-toggle>
-          <ion-item>Connexion</ion-item>
+        <ion-menu-toggle *ngIf="logged">
+            <ion-item [routerLink]="['profil']">Mon Profil</ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle *ngIf="logged">
+              <ion-item [routerLink]="['mes-commandes', id]">Mes commandes</ion-item>
+            </ion-menu-toggle>
+          <ion-menu-toggle *ngIf="AdminLogged">
+              <ion-item [routerLink]="['dashboard']">Dashboard</ion-item>
+            </ion-menu-toggle>
+        <ion-menu-toggle *ngIf='!logged'>
+          <ion-item [routerLink]="['login']">Connexion</ion-item>
         </ion-menu-toggle>
+        <ion-menu-toggle *ngIf='logged'>
+            <ion-item (click)=logOut()>Deconnexion</ion-item>
+          </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item>Panier</ion-item>
+          <ion-item [routerLink]="['panier']">Panier</ion-item>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

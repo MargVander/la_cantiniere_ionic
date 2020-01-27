@@ -30,12 +30,18 @@ import { MealsComponent } from './meals/meals.component';
 import { MealEditComponent } from './meal-edit/meal-edit.component';
 import { MenusComponent } from './menus/menus.component';
 import { MenuEditComponent } from './menu-edit/menu-edit.component';
-// import { UsersComponent } from './users/users.component';
-// import { UserComponent } from './user/user.component';
+import { UsersComponent } from './users/users.component';
+import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { ConstraintEditComponent } from './constraint-edit/constraint-edit.component';
 import { OrderComponent } from './order/order.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard, AdminGuard } from './services/auth/auth.guard';
+import { LoginComponent } from './login/login.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+
+
 
 @NgModule({
   declarations: [
@@ -61,18 +67,23 @@ import { OrderComponent } from './order/order.component';
     MealEditComponent,
     MenusComponent,
     MenuEditComponent,
-    // UsersComponent,
-    // UserComponent,
+    UsersComponent,
+    UserComponent,
     UserEditComponent,
     AccueilComponent,
     ConstraintEditComponent,
     OrderComponent,
+    DashboardComponent,
+    LoginComponent,
+    ForgotpasswordComponent
   ],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule],
   providers: [
     StatusBar,
     SplashScreen,
+    AuthGuard,
+    AdminGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -6,6 +6,7 @@ import { OrderService } from './../services/order/order.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { LoginService } from '../services/login/login.service';
 
 @Component({
   selector: 'app-panier',
@@ -14,7 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class PanierComponent implements OnInit {
 
-  constructor(private orderService: OrderService, private router: Router) { }
+  constructor(private orderService: OrderService, private router: Router, private loginService: LoginService) { }
 
   menuPanier: [];
   userConnected: User;
@@ -25,15 +26,22 @@ export class PanierComponent implements OnInit {
   listArticles: Menu[] = [];
   price: number;
   order: Order;
+  logged: boolean = false;  
+  AdminLogged: Boolean = false
+  id: any
    
   ngOnInit() {
-   /* if (this.auth.isLogged()) {
-      this.isAuth = true;
-      this.userConnected = this.auth.getUserConnected();
-    } else {
-      this.userConnected = null;
-      this.isAuth = false;
-    }*/
+    this.loginService.isLoggedIn.subscribe(logged => { this.logged = logged })
+    this.loginService.isLoggedAdmin.subscribe(AdminLogged => { this.AdminLogged = AdminLogged })
+    this.id = localStorage.getItem('id')
+
+  //  if (this.logged) {
+  //     this.isAuth = true;
+  //     this.userConnected = this.auth.getUserConnected();
+  //   } else {
+  //     this.userConnected = null;
+  //     this.isAuth = false;
+  //   }
     this.recupererPanier();
     if (this.menuPanier != null) {
       this.calculerTotalPanier();
@@ -72,7 +80,6 @@ export class PanierComponent implements OnInit {
   }
 
    creerLaCommande() {
-    const user = this.userConnected;
     const menu = this.menuPanier;
 
       // tslint:disable-next-line: prefer-for-of
@@ -84,7 +91,7 @@ export class PanierComponent implements OnInit {
           status: 0,
           creationDate: new Date(),
           menuId: this.listArticles[i].menu.id,
-          userId: this.userConnected.id,
+          userId: this.id,
           quantities: null
         };
 

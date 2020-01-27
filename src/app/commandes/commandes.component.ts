@@ -39,6 +39,8 @@ export class CommandesComponent implements OnInit {
 
   payOrder(id) {
     this.orderService.payOrder(id);
+    location.reload();
+
   }
 
   changeStatus(num) {
@@ -48,6 +50,8 @@ export class CommandesComponent implements OnInit {
 
   cancelOrder(id) {
     this.orderService.cancelOrder(id);
+    location.reload();
+
   }
 
 }

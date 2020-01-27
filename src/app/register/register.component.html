@@ -1,3 +1,53 @@
-<p>
-  register works!
-</p>
+<ion-header>
+  <ion-item>
+    <ion-label>Inscription</ion-label>
+  </ion-item>
+</ion-header>
+<ion-content>
+  <form [formGroup]="registerForm" (ngSubmit)='inscription()'>
+    <ion-item>
+      <ion-label>Prénom :</ion-label>
+      <ion-input type='text' formControlName="firstname"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Nom :</ion-label>
+      <ion-input type='text' formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Adresse mail :</ion-label>
+      <ion-input type='email' formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Mot de passe</ion-label>
+      <ion-input type='password' formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Sexe</ion-label>
+      <ion-select formControlName="sex">
+        <ion-select-option value="0">Homme</ion-select-option>
+        <ion-select-option value="1">Femme</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Numéro de téléphone :</ion-label>
+      <ion-input type='tel' formControlName="phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Adresse :</ion-label>
+      <ion-input type='text' formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Code Postal :</ion-label>
+      <ion-input type='tel' formControlName="postalCode"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ville :</ion-label>
+      <ion-input type='tel' formControlName="town"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" expand="block">Envoyer</ion-button>
+  </form>
+
+
+
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-item>
+        <ion-label>Profil Utilisateur</ion-label>
+    </ion-item>
+</ion-header>
+<ion-content class="ion-padding" *ngIf="user">
+    <ion-avatar>
+        <img src="http://localhost:8080/lunchtime/{{user.image}}" alt="">
+    </ion-avatar>
+    <ion-text>
+        <h1 *ngIf="user.firstname" style="text-align: center;">
+            {{ user.firstname }} {{user.name}}
+        </h1>
+        <div class="flex">
+            <ion-icon name="logo-euro"></ion-icon>
+            <p>{{user.wallet}} €</p>
+        </div>
+        <form *ngIf="user" (ngSubmit)="update()" [formGroup]="updateForm">
+            <div class="flex">
+                <ion-icon name="pizza"></ion-icon>
+                <ion-select value="user.isLunchLady" formControlName="isLunchLady">
+                    <ion-select-option value="false">Utilisateur</ion-select-option>
+                    <ion-select-option value="true">Cantinière</ion-select-option>
+                </ion-select>
+            </div>
+            <ion-item>
+                <ion-label>Mot de passe :</ion-label>
+                <ion-input type='password' formControlName="password"></ion-input>
+            </ion-item>
+            <ion-button type="submit"> Modifier </ion-button>
+        </form>
+        <form *ngIf="user" (ngSubmit)="updateMoney()" [formGroup]="moneyForm">
+            <ion-item>
+                <ion-label>Ajouter du credit :</ion-label>
+                <ion-input type='number' formControlName="amount"></ion-input>
+            </ion-item>
+            <ion-button type="submit">Valider </ion-button>
+
+        </form>
+    </ion-text>
+    <div class="center">
+    </div>
+<ion-button [routerLink]="['/users']">Retour vers la liste des utilisateurs</ion-button>
+</ion-content>

@@ -1,3 +1,36 @@
-<p>
-  commandes works!
-</p>
+<ion-header>
+  <ion-item>
+    <ion-label>Commandes</ion-label>
+  </ion-item>
+</ion-header>
+<ion-content *ngIf="orders">
+  <ion-button (click)="getOrdersByDay(1)">Lundi</ion-button><ion-button (click)="getOrdersByDay(2)">Mardi</ion-button><ion-button (click)="getOrdersByDay(3)">Mercredi</ion-button><ion-button (click)="getOrdersByDay(4)">Jeudi</ion-button><ion-button (click)="getOrdersByDay(5)">Vendredi</ion-button>
+  <ion-grid>
+    <ion-row *ngFor="let order of orders">
+      <ion-col>
+        <div>
+          {{order.user.firstname}} {{order.user.name}}
+        </div>
+      </ion-col>
+      <ion-col *ngIf=order.menu>
+        <div>
+          {{order.menu.label}}
+        </div>
+      </ion-col>
+      <ion-col *ngIf="order.quantityMeals">
+        <div>
+          <p *ngFor="let meal of order.quantityMeals">{{meal.quantity}}, {{meal.meal.label}}</p>
+        </div>
+      </ion-col>
+      <ion-col>
+        <ion-button (click)="payOrder(order.id)" *ngIf="status===0">Valider</ion-button>
+      </ion-col>
+      <ion-col>
+          <ion-button color="danger" (click)="cancelOrder(order.id)" *ngIf="status===0">X</ion-button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button (click)="changeStatus(1)" *ngIf="status===0">Afficher les commandes emportées</ion-button>
+  <ion-button (click)="changeStatus(0)" *ngIf="status===1">Afficher les commandes non emportées</ion-button>
+
+</ion-content>

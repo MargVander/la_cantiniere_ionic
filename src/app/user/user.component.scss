@@ -1,0 +1,19 @@
+ion-avatar, ion-button{
+    margin: auto;
+    margin-top: 10px;
+}
+.flex{
+    display: flex;
+    align-items: center;
+}
+ion-label ion-icon {
+    height: 100%;
+    margin-right: 5px;
+}
+.center{
+    display: flex;
+    justify-content: space-around;
+}
+ion-icon{
+    margin-right: 10px;
+}
